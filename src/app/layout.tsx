@@ -32,10 +32,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#151C25] text-white`}
-      >
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#151C25] text-white`}>
         <AuthProvider>
           <NavLinks />
           {children}
