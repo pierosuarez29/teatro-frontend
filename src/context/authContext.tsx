@@ -3,21 +3,28 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
+type UserType = {
+  id: string;
+  name: string;
+  email: string;
+  role: string; // Añadir el campo role
+};
+
 type AuthContextType = {
-  user: { id: string; name: string; email: string } | null;
+  user: UserType | null;
   token: string | null;
-  login: (token: string, user: { id: string; name: string; email: string }) => void;
+  login: (token: string, user: UserType) => void;
   logout: () => void;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<{ id: string; name: string; email: string } | null>(null);
+  const [user, setUser] = useState<UserType | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const router = useRouter();
 
-  const login = (jwtToken: string, userData: { id: string; name: string; email: string }) => {
+  const login = (jwtToken: string, userData: UserType) => {
     setToken(jwtToken);
     setUser(userData);
     localStorage.setItem("token", jwtToken);
